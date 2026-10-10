@@ -18,6 +18,8 @@ from PyQt6.QtWidgets import (
     QComboBox,
 )
 
+from styles import global_style, add_meds_style
+
 class AddMeds(QWidget):
     
     close_add_meds_signal = pyqtSignal()
@@ -26,9 +28,12 @@ class AddMeds(QWidget):
         super().__init__(parent)
         
         self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
-        self.setStyleSheet(f"background-color: {colors.dark_blue};")
+
+        self.setStyleSheet(global_style.global_style)
+        self.setStyleSheet(add_meds_style.add_style)
         
         my_layout = QVBoxLayout(self)
+        my_layout.setContentsMargins(20, 2, 20, 2)
         
         dose_layout = QHBoxLayout()
         hour_minutes_layout = QHBoxLayout()
@@ -99,8 +104,8 @@ class AddMeds(QWidget):
         self.warning_message = QLabel()
         self.save_button = QPushButton("Save")
         self.cancel_button = QPushButton("Cancel")
-        self.save_button.setStyleSheet(f"background-color: {colors.dark_teal};")
-        self.cancel_button.setStyleSheet(f"background-color: {colors.light_teal};")
+        self.save_button.setProperty("class", "save_button")
+        self.cancel_button.setProperty("class", "cancel_button")
         
         #---------------------------------------------------------
         # Layout application
@@ -269,4 +274,19 @@ class AddMeds(QWidget):
                                       db_day_first_dose,
                                       db_after_every,
                                       schedule_format)
+
+        self.med_name_insert.setText("")
+        self.med_dose_insert.setText("")
+
+        self.med_first_hour_insert.setText("")
+        self.med_first_minutes_insert.setText("")
+        
+        self.med_first_day_insert.setText("")
+        self.med_month_insert.setText("")
+        self.med_year_insert.setText("")
+        
+        self.med_number_time_insert.setText("")
+        self.med_number_minutes_insert.setText("")
+        
+        self.close_add_meds_signal.emit()
         

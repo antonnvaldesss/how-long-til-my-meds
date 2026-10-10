@@ -45,5 +45,8 @@ class Database:
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM medicine")
+        all_medicine = cursor.fetchall()
         conn.commit()
         conn.close()
+        
+        return all_medicine

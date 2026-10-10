@@ -19,6 +19,8 @@ from PyQt6.QtWidgets import (
     QWidget,
 )
 
+from styles import global_style
+
 
 class FirstView(QWidget):
     
@@ -26,10 +28,8 @@ class FirstView(QWidget):
     
     def __init__(self) -> None:
         super().__init__()
-        
         self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
-        self.setStyleSheet(f"background-color: {colors.dark_blue};")
-
+        self.setStyleSheet(global_style.global_style)
         # Layouts
         layout = QHBoxLayout(self)
         right_side = QVBoxLayout()
